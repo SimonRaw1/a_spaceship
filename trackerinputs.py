@@ -1,35 +1,35 @@
 restart = 0
 from datetime import date
 dateToday = str(date.today())
-while restart == 0:
+while restart == 0:  #Repeat till user selects not to continure
     lift = input('Enter the chosen lift (S,B,D): ')
-    if lift in ['s','S']:
+    if lift in ['s','S']:   #Check if squats were chosen
         print ('Number of sets:')
-        squatSets = int(input())
+        squatSets = int(input()) #Number of set input
         print()
-        if squatSets != 0:
+        if squatSets > 0:  #Only continue if you the input is at least 1 set. Inputting 0 will ask them if they want to start again or end
             try:
-                open('Squat Sessions.txt')
+                open('Squat Sessions.txt')  #Check to see if the textfile exists
             except:
-                with open ('Squat Sessions.txt', 'w') as text_file:
+                with open ('Squat Sessions.txt', 'w') as text_file: #if it Doesnt exist then create the file and print a heading at the top.
                     print(f"Record of all Squat Sessions", file=text_file)
             squatReps = [0]*squatSets
             squatWeights = [0]*squatSets
             for i in range(0, squatSets):
-                print (f"Reps for set {i+1}:")
-                squatReps[i] = int(input())
+                print (f"Reps for set {i+1}:") 
+                squatReps[i] = int(input()) #Number of reps for each set input
             print()  
             for i in range(0, squatSets):    
                 print (f"Weight for set {i+1}:")
-                squatWeights[i] = int(input())
-            with open("Squat Sessions.txt", "a") as text_file:
+                squatWeights[i] = int(input()) #Weight of each set input
+            with open("Squat Sessions.txt", "a") as text_file: #Ammend to text file that was opened earlier
                 print(f"\nSquat Session ({dateToday}):", file=text_file)
                 for i in range(0,squatSets):
                     print(f"{squatReps[i]} reps at {squatWeights[i]}kg", file=text_file)
             end = input('Would you like to enter another session? (Y/N) ')
             if end in ['y','Y']:
                 print('\n')
-            if end in ['n','N']:
+            if end in ['n','N']: #End the while loop if they select not to add another session
                 break
         else:
             end = input('Would you like to enter another session? (Y/N) ')
@@ -37,7 +37,8 @@ while restart == 0:
                 print('\n')
             if end in ['n','N']:
                 break
-    if lift in ['b','B']:
+
+    if lift in ['b','B']: #Check if Bench was chosen and repeat the same process as for squats
         print ('Number of sets:')
         benchSets = int(input())
         print()
@@ -72,7 +73,7 @@ while restart == 0:
             if end in ['n','N']:
                 break
         
-    if lift in ['d','D']:
+    if lift in ['d','D']: #Check if Deadlift was chosen and repeat the same process as for squats
         print ('Number of sets:')
         deadliftSets = int(input())
         print()
