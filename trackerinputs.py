@@ -12,7 +12,7 @@ while restart == 0:  #Repeat till user selects not to continure
                 open('Squat Sessions.txt')  #Check to see if the textfile exists
             except:
                 with open ('Squat Sessions.txt', 'w') as text_file: #if it Doesnt exist then create the file and print a heading at the top.
-                    print(f"Record of all Squat Sessions", file=text_file)
+                    print(f"Record of all Squat Sessions", file=text_file) 
             squatReps = [0]*squatSets
             squatWeights = [0]*squatSets
             for i in range(0, squatSets):
@@ -38,7 +38,7 @@ while restart == 0:  #Repeat till user selects not to continure
             if end in ['n','N']:
                 break
 
-    if lift in ['b','B']: #Check if Bench was chosen and repeat the same process as for squats
+    if lift in ['b','B']: #Check if bench was chosen and repeat the same process as for squats
         print ('Number of sets:')
         benchSets = int(input())
         print()
@@ -66,7 +66,7 @@ while restart == 0:  #Repeat till user selects not to continure
                 print('\n')
             if end in ['n','N']:
                 break
-        else:
+        else:     #if they enter less than 1 for number of sets
             end = input('Would you like to enter another session? (Y/N) ')
             if end in ['y','Y']:
                 print('\n')
