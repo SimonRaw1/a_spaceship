@@ -25,7 +25,7 @@ while restart == 0:  #Repeat till user selects not to continure
             with open("Squat Sessions.txt", "a") as text_file: #Ammend to text file that was opened earlier
                 print(f"\nSquat Session ({dateToday}):", file=text_file)
                 for i in range(0,squatSets):
-                    print(f"{squatReps[i]} reps at {squatWeights[i]}kg", file=text_file)
+                    print(f"{squatReps[i]} @ {squatWeights[i]}kg", file=text_file)
             end = input('Would you like to enter another session? (Y/N) ')
             if end in ['y','Y']:
                 print('\n')
@@ -60,7 +60,7 @@ while restart == 0:  #Repeat till user selects not to continure
             with open("Bench Sessions.txt", "a") as text_file:
                 print(f"\nBench Session ({dateToday}):", file=text_file)
                 for i in range(0,benchSets):
-                    print(f"{benchReps[i]} reps at {benchWeights[i]}kg", file=text_file)
+                    print(f"{benchReps[i]} @ {benchWeights[i]}kg", file=text_file)
             end = input('Would you like to enter another session? (Y/N) ')
             if end in ['y','Y']:
                 print('\n')
@@ -95,7 +95,7 @@ while restart == 0:  #Repeat till user selects not to continure
             with open("Deadlift Sessions.txt", "a") as text_file:
                 print(f"\nDeadlift Session ({dateToday}):", file=text_file)
                 for i in range(0,deadliftSets):
-                    print(f"{deadliftReps[i]} reps at {deadliftWeights[i]}kg", file=text_file)
+                    print(f"{deadliftReps[i]} @ {deadliftWeights[i]}kg", file=text_file)
             end = input('Would you like to enter another session? (Y/N) ')
             if end in ['y','Y']:
                 print('\n')
