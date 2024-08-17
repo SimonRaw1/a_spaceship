@@ -52,15 +52,25 @@ def checkfile():
     except:
         with open (lift_string + ' Sessions.txt', 'w') as text_file:
             print(f"Record of all Squat Sessions", file=text_file) 
+def rw_input(y):
+    x = [0]*sets_input
+    for i in range(0, sets_input):
+        x[i] = safeinput(f"{y} for set {i+1}: ",int)
+    return x
+
+def output():
+    with open(lift_string + ' Sessions.txt', "a") as text_file:
+        print(f"\n{lift_string} Session ({dateToday}):", file=text_file)
+        for i in range(0,sets_input):
+            print(f"{weight[i]}kg x {reps[i]}", file=text_file) 
 
 
 #Repeat until user selects not to continue
 while True:       
 
         lift_string = choose_lift()       
-        sets_input = safeinput('Number of sets:\n',int)
+        sets_input = safeinput('Number of sets: ',int)
         print()
-
         """
         Only continue if you the input is greater than 0
         Inputing 0 will ask them if they want to start again or end
@@ -71,19 +81,11 @@ while True:
             Ask for rep and weight inputs
             Add the inputs into the correct textfile
             """         
-            reps = [0]*sets_input
-            weight = [0]*sets_input
-            for i in range(0, sets_input):
-                reps[i] = safeinput(f"Reps for set {i+1}:\n",int) 
-            print()  
-            for i in range(0, sets_input):    
-                weight[i] = safeinput(f"Weight for set {i+1}:\n", int) 
-            with open(lift_string + ' Sessions.txt', "a") as text_file:
-                print(f"\n{lift_string} Session ({dateToday}):", file=text_file)
-                for i in range(0,sets_input):
-                    print(f"{weight[i]}kg x {reps[i]}", file=text_file) 
-
+            reps = rw_input("Reps")
+            print()
+            weight = rw_input("Weight")
+            print()
+            output()          
             cont()
-
         else:
             cont()
