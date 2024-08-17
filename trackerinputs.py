@@ -16,6 +16,23 @@ def safeinput(inp,type):
         except:
             print("Please enter a valid input")
 
+"""
+Ask the user if they would like to continue and add another session or end
+checks for correct input of Y or N (accepts lowercase)
+asks for a correct input if the user inputs anything else
+"""         
+def cont(): 
+    end = safeinput('Would you like to enter another session? (Y/N): ',str)      
+    while True:              
+        match end.upper():
+            case 'Y':
+                print()
+                break
+            case 'N':
+                sys.exit()
+            case _:
+                end = safeinput("Please enter Y or N: ",str)
+
 
 #Repeat until user selects not to continue
 while True:       
@@ -63,30 +80,8 @@ while True:
             with open(lift_string + ' Sessions.txt', "a") as text_file:
                 print(f"\n{lift_string} Session ({dateToday}):", file=text_file)
                 for i in range(0,sets_input):
-                    print(f"{weight[i]}kg x {reps[i]}", file=text_file)
-            """
-            Ask the user if they would like to continue and add another session or end
-            checks for correct input of Y or N (accepts lowercase)
-            asks for a correct input if the user inputs anything else
-            """        
-            while True:        
-                end = safeinput('Would you like to enter another session? (Y/N): ',str)
-                match end.upper():
-                    case 'Y':
-                        print()
-                        break
-                    case 'N':
-                        sys.exit()
-                    case _:
-                        print("Please enter Y or N")
+                    print(f"{weight[i]}kg x {reps[i]}", file=text_file)                       
+            cont()
+
         else:
-            while True:        
-                end = safeinput('Would you like to enter another session? (Y/N): ',str)
-                match end.upper():
-                    case 'Y':
-                        print()
-                        break
-                    case 'N':
-                        sys.exit()
-                    case _:
-                        print("Please enter Y or N")
+            cont()
