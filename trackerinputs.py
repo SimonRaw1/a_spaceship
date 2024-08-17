@@ -14,11 +14,15 @@ def safeinput(inp,type):
         try:
             return type(input(inp))         
         except:
-            print("Please enter a valid integer input")
+            print("Please enter a valid input")
 
 
-#Repeat till user selects not to continue
-while True:
+#Repeat until user selects not to continue
+while True:       
+        """
+        Asks for an input to select the lift to add to
+        runs until a correct input is given
+        """
         while True:
             lift = safeinput('Enter the chosen lift (' + ",".join(list(lift_translation.keys())) + "): ", str)
             lift_string : str
@@ -27,9 +31,14 @@ while True:
                 break
             except:
                 pass
+
         sets_input = safeinput('Number of sets:\n',int)
         print()
-        #Only continue if you the input is at least 1 set. Inputting 0 will ask them if they want to start again or end
+
+        """
+        Only continue if you the input is greater than 0
+        Inputing 0 will ask them if they want to start again or end
+        """
         if sets_input > 0:         
             """
             Check to see if the textfile exists
@@ -40,17 +49,26 @@ while True:
             except:
                 with open (lift_string + ' Sessions.txt', 'w') as text_file:
                     print(f"Record of all Squat Sessions", file=text_file) 
+            """
+            Ask for rep and weight inputs
+            Add the inputs into the correct textfile
+            """         
             reps = [0]*sets_input
             weight = [0]*sets_input
             for i in range(0, sets_input):
-                reps[i] = safeinput(f"Reps for set {i+1}:\n",int) #Number of reps for each set input
+                reps[i] = safeinput(f"Reps for set {i+1}:\n",int) 
             print()  
             for i in range(0, sets_input):    
-                weight[i] = safeinput(f"Weight for set {i+1}:\n", int) #Weight of each set input
-            with open(lift_string + ' Sessions.txt', "a") as text_file: #Ammend to text file that was opened earlier
-                print(f"\n{lift_string} ({dateToday}):", file=text_file)
+                weight[i] = safeinput(f"Weight for set {i+1}:\n", int) 
+            with open(lift_string + ' Sessions.txt', "a") as text_file:
+                print(f"\n{lift_string} Session ({dateToday}):", file=text_file)
                 for i in range(0,sets_input):
                     print(f"{weight[i]}kg x {reps[i]}", file=text_file)
+            """
+            Ask the user if they would like to continue and add another session or end
+            checks for correct input of Y or N (accepts lowercase)
+            asks for a correct input if the user inputs anything else
+            """        
             while True:        
                 end = safeinput('Would you like to enter another session? (Y/N): ',str)
                 match end.upper():
