@@ -1,5 +1,6 @@
 from datetime import date
 import sys
+import json
 
 dateToday = str(date.today())
 lift_string = ""
@@ -8,6 +9,7 @@ lift_translation = {
     "B" : "Bench",
     "D" : "Deadlift",
 }
+sessions_dict = {}
 
 def safeinput(inp,type):
     while True: 
@@ -49,10 +51,12 @@ def rw_input(y):
     return x
 
 def save_file():
-    with open(lift_string + ' Sessions.csv', "a") as text_file:
-        print(f"{dateToday},", end="", file=text_file)
-        for i in range(0,sets_input):
-            print(f"{weight[i]}kg,{reps[i]},", end="", file=text_file)
+    sessions_dict = {dateToday:[]}
+    for i in range(0,sets_input):
+        sessions_dict[dateToday].append({"rep"+str(i+1) : reps[i],"weight"+str(i+1)  : weight[i]})
+    
+    with open(lift_string + ' Sessions.json', "a") as f:
+        json.dump(sessions_dict,f)
             
 
 if __name__ == '__main__':
