@@ -30,7 +30,7 @@ def choose_lift():
         except:
             pass
 
-def cont(): 
+def continue_checker(): 
     end = safeinput('Would you like to enter another session? (Y/N): ',str)      
     while True:              
         match end.upper():
@@ -42,50 +42,40 @@ def cont():
             case _:
                 end = safeinput("Please enter Y or N: ",str)
 
-def checkfile():
-    """
-    Check to see if the textfile exists
-    if it doesnt exist then create the file and print a heading at the top.
-    """
-    try:
-        open(lift_string + ' Sessions.txt')  
-    except:
-        with open (lift_string + ' Sessions.txt', 'w') as text_file:
-            print(f"Record of all Squat Sessions", file=text_file) 
 def rw_input(y):
     x = [0]*sets_input
     for i in range(0, sets_input):
         x[i] = safeinput(f"{y} for set {i+1}: ",int)
     return x
 
-def output():
-    with open(lift_string + ' Sessions.txt', "a") as text_file:
-        print(f"\n{lift_string} Session ({dateToday}):", file=text_file)
+def save_file():
+    with open(lift_string + ' Sessions.csv', "a") as text_file:
+        print(f"{dateToday},", end="", file=text_file)
         for i in range(0,sets_input):
-            print(f"{weight[i]}kg x {reps[i]}", file=text_file) 
+            print(f"{weight[i]}kg,{reps[i]},", end="", file=text_file)
+            
 
+if __name__ == '__main__':
+    #Repeat until user selects not to continue
+    while True:       
 
-#Repeat until user selects not to continue
-while True:       
-
-        lift_string = choose_lift()       
-        sets_input = safeinput('Number of sets: ',int)
-        print()
-        """
-        Only continue if you the input is greater than 0
-        Inputing 0 will ask them if they want to start again or end
-        """
-        if sets_input > 0:         
-            checkfile()
+            lift_string = choose_lift()       
+            sets_input = safeinput('Number of sets: ',int)
+            print()
             """
-            Ask for rep and weight inputs
-            Add the inputs into the correct textfile
-            """         
-            reps = rw_input("Reps")
-            print()
-            weight = rw_input("Weight")
-            print()
-            output()          
-            cont()
-        else:
-            cont()
+            Only continue if the input is greater than 0
+            Inputing 0 will ask them if they want to start again or end
+            """
+            if sets_input > 0:         
+                """
+                Ask for rep and weight inputs
+                Add the inputs into the correct textfile
+                """         
+                reps = rw_input("Reps")
+                print()
+                weight = rw_input("Weight")
+                print()
+                save_file()          
+                continue_checker()
+            else:
+                continue_checker()
